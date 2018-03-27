@@ -10,10 +10,11 @@ int charCalc(char x);
 char intCalc(int x);
 
 int main() {
-	char stay;
+	char question;
 	char padChar;
 	int padNum=0;
 	int added=0;
+	bool again = true;
 	string option, eMessage;
 	
 	cout << "Select a pad to load by entering the the pad's number" << endl << "Pad 1" << endl << "Pad 2" << endl;
@@ -25,36 +26,45 @@ int main() {
 		exit(1);
 	}
 
-	cout << "Do you need to ecrypt or decrypt a message?" << endl;
-	cin >> option;
+	while (again == true) {
+		cout << "Do you need to ecrypt or decrypt a message?" << endl;
+		cin >> option;
 
-	if (option == "encrypt") {
-		cout << "Enter the message you want to encrypt: ";
-		cin.ignore();
-		getline(cin, eMessage);
+		if (option == "encrypt") {
+			cout << "Enter the message you want to encrypt: ";
+			cin.ignore();
+			getline(cin, eMessage);
 
-		for (int x = 0; x < eMessage.length(); x++) {
-			inn >> padChar;
-			added = ((charCalc(eMessage[x]) + charCalc(padChar)) % 27);
-			cout << intCalc(added) << " ";
+			for (int x = 0; x < eMessage.length(); x++) {
+				inn >> padChar;
+				added = ((charCalc(eMessage[x]) + charCalc(padChar)) % 27);
+				cout << intCalc(added) << " ";
 
+			}
+
+			cout << " is the encrypted message." << endl;
 		}
 
-		cout << " is the encrypted message." << endl;
-	}
+		else if (option == "decrypt") {
+			cout << "Enter the message you want to decrypt: ";
+			cin.ignore();
+			getline(cin, eMessage);
 
-	else if (option == "decrypt") {
-		cout << "Enter the message you want to decrypt: ";
-		cin.ignore();
-		getline(cin, eMessage);
-
-		for (int x = 0; x < eMessage.length(); x++) {
-			
+			for (int x = 0; x < eMessage.length(); x++) {
+				inn >> padChar;
+				added = (((charCalc(eMessage[x]) + 27) - charCalc(padChar)) % 27);
+				cout << intCalc(added) << " ";
+			}
+			cout << " is the decrypted message" << endl;
 		}
 
-
+		cout << "Would you like to work on another message? y/n" << endl;
+		cin >> question;
+		if (question == 'y' || question == 'Y') {
+			again = true;
+		}
+		else { again = false; }
 	}
-	cin >> stay;
 	return 0;
 }
 
