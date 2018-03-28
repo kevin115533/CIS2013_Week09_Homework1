@@ -281,7 +281,7 @@ char intCalc(int x) {
 	else if (x == 26) {
 		eChar = 'z';
 	}
-	else if (x == 27) {
+	else if (x == 27 || x==0) {
 		eChar = ' ';
 	}
 	return eChar;
