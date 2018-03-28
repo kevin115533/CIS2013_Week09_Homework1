@@ -12,11 +12,13 @@ char intCalc(int x);
 int main() {
 	char question;
 	char padChar;
+	char option;
 	int padNum=0;
 	int added=0;
 	bool again = true;
-	string option, eMessage;
+	string eMessage;
 	
+	while (again == true) {
 	cout << "Select a pad to load by entering the the pad's number" << endl << "Pad 1" << endl << "Pad 2" << endl;
 	cin >> padNum;
 
@@ -26,11 +28,10 @@ int main() {
 		exit(1);
 	}
 
-	while (again == true) {
-		cout << "Do you need to ecrypt or decrypt a message?" << endl;
+		cout << "Do you want 1-Encrypt or 2-Decrypt? Enter the option number: ";
 		cin >> option;
 
-		if (option == "encrypt") {
+		if (option == '1') {
 			cout << "Enter the message you want to encrypt: ";
 			cin.ignore();
 			getline(cin, eMessage);
@@ -41,11 +42,11 @@ int main() {
 				cout << intCalc(added) << " ";
 
 			}
-
-			cout << " is the encrypted message." << endl;
+		cout << " is the encrypted message." << endl;
+		
 		}
 
-		else if (option == "decrypt") {
+		else if (option == '2') {
 			cout << "Enter the message you want to decrypt: ";
 			cin.ignore();
 			getline(cin, eMessage);
@@ -53,11 +54,12 @@ int main() {
 			for (int x = 0; x < eMessage.length(); x++) {
 				inn >> padChar;
 				added = (((charCalc(eMessage[x]) + 27) - charCalc(padChar)) % 27);
-				cout << intCalc(added) << " ";
+				cout << intCalc(added);
 			}
 			cout << " is the decrypted message" << endl;
 		}
-
+		
+		inn.close();
 		cout << "Would you like to work on another message? y/n" << endl;
 		cin >> question;
 		if (question == 'y' || question == 'Y') {
@@ -65,6 +67,7 @@ int main() {
 		}
 		else { again = false; }
 	}
+	
 	return 0;
 }
 
